@@ -41,24 +41,35 @@ public class SingupServlet extends HttpServlet {
 		String user = request.getParameter("username");
 		String pass = request.getParameter("password");
 		
-		dto.setUser(user);
-		dto.setPass(pass);
-		
-		boolean test = sdao.singup(dto);
-		
-		if(test == true) {//正常に終了した場合
-			System.out.println("遷移");
-			request.setAttribute("error", "登録が成功しました。ログイン可能です。");
-			RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
-			rd.forward(request, response);
-			return;
+		if(!user.isEmpty() && !pass.isEmpty()) {
+			//dtoにセット
+			dto.setUser(user);
+			dto.setPass(pass);
+			
+			boolean test = sdao.singup(dto);
+			
+			if(test == true) {//正常に終了した場合
+				System.out.println("遷移");
+				request.setAttribute("error", "登録が成功しました。ログイン可能です。");
+				RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+				rd.forward(request, response);
+				return;
+			}else {
+				System.out.println("登録失敗");
+				request.setAttribute("error", "すでに使用されています。");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("sinup.jsp");
+				dispatcher.forward(request, response);
+				return;
+			}
 		}else {
-			System.out.println("登録失敗");
-			request.setAttribute("error", "すでに使用されています。");
+			System.out.println("登録なし");
+			request.setAttribute("error", "ユーザ名、パスワードを入力してください");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("sinup.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}
+		
+		
 		
 		
 		

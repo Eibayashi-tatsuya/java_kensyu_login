@@ -118,8 +118,8 @@
                 <input type="submit" class="menu-button" value="プロフィール画面へ">
             </form>
 
-            <form action="SettingsServlet" method="get" onsubmit="showAlert('設定画面')">
-                <input type="submit" class="menu-button" value="設定画面へ">
+            <form action="FromServlet" method="get" onsubmit="showAlert('設定画面')">
+                <input type="submit"  class="menu-button"name="button" value="setting" >
             </form>
 
             <form action="FromServlet" method="post" onsubmit="return confirmLogout();">

@@ -37,6 +37,13 @@ public class FromServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 			dispatcher.forward(request, response);
 			return;
+			
+		}else if(button.equals("setting")){
+			System.out.println("settingへ遷移");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("setting_menu.jsp");
+			dispatcher.forward(request, response);
+			return;
+			
 		}
 		
 		

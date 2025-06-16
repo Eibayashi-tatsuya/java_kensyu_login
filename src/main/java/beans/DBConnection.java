@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-	private String dbName = "login";
+	private String dbName = "login";//データベース名
 	private String properties = "?characterEncoding=utf-8";
 	private String url = "jdbc:mysql://localhost:3306/" + dbName + properties;
 
@@ -22,7 +22,7 @@ public class DBConnection {
 	 * コンストラクタ
 	 */
 	public DBConnection() {
-
+		
 	}
 
 	public DBConnection(String dbName) {
@@ -35,6 +35,7 @@ public class DBConnection {
 		this.pass = pass;
 	}
 
+	//DBとの接続
 	public Connection getConnection() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
