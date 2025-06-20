@@ -34,19 +34,21 @@ public class SingupServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("UTF8");
-		
+		//オブジェクト生成
 		SingupDAO sdao = new SingupDAO();
 		UserDTO dto = new UserDTO();
 		
+		//入値の受け取り
 		String user = request.getParameter("username");
 		String pass = request.getParameter("password");
 		
+		//nullチェック
 		if(!user.isEmpty() && !pass.isEmpty()) {
 			//dtoにセット
 			dto.setUser(user);
 			dto.setPass(pass);
 			
-			boolean test = sdao.singup(dto);
+			boolean test = sdao.singup(dto);//引数DTOを渡す。今回の場合userとpass
 			
 			if(test == true) {//正常に終了した場合
 				System.out.println("遷移");
@@ -66,6 +68,7 @@ public class SingupServlet extends HttpServlet {
 			request.setAttribute("error", "ユーザ名、パスワードを入力してください");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("sinup.jsp");
 			dispatcher.forward(request, response);
+			
 			return;
 		}
 		

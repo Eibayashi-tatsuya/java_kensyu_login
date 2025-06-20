@@ -19,7 +19,7 @@ public class SingupDAO {
 	public SingupDAO() {
 		DBConnection dbCon = new DBConnection();//インスタンス生成
 		this.con = dbCon.getConnection();//接続処理
-
+		//接続チェック
 		if (this.con == null) {
 			System.out.println("DB接続失敗：Connectionがnullです");
 		}
@@ -35,6 +35,8 @@ public class SingupDAO {
 			prst = con.prepareStatement(sql);
 			prst.setString(1, user.getUser());//一つ目の？にバインド
 			prst.setString(2, user.getPass());//二つ目の?にバインド
+			//バインド処理後のsql文
+			System.out.println(prst.toString());
 			
 			//バインド処理後に実行する
 			int rowsInserted = prst.executeUpdate();
@@ -70,8 +72,6 @@ public class SingupDAO {
 		}
 		return test;
 	}
-	
-	
 	
 
 }
