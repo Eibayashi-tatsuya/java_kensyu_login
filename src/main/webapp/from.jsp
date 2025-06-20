@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,9 +22,7 @@
             height: 100vh;
             padding: 20px;
             box-sizing: border-box;
-            position: fixed;
-            top: 0;
-            left: 0;
+            position: relative;
         }
 
         .sidebar h2 {
@@ -38,15 +37,42 @@
             text-decoration: none;
             margin: 15px 0;
             font-size: 16px;
+            padding: 10px;
+            border-radius: 6px;
+            transition: background-color 0.3s;
         }
 
         .sidebar a:hover {
-            text-decoration: underline;
+            background-color: #34495e;
+        }
+
+        /* ログアウトボタン */
+        .logout-wrapper {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+        }
+
+        .logout-button {
+            display: block;
+            width: 100%;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 0;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .logout-button:hover {
+            background-color: #c0392b;
         }
 
         /* メインコンテンツ */
         .main-content {
-            margin-left: 220px;
             padding: 40px;
             width: calc(100% - 220px);
             box-sizing: border-box;
@@ -69,24 +95,28 @@
             background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 16px;
+            width: 120px;
+            height: 120px;
+            font-size: 14px;
             cursor: pointer;
-            border-radius: 8px;
-            min-width: 200px;
+            border-radius: 12px;
             transition: background-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 8px;
         }
 
         .menu-button:hover {
             background-color: #45a049;
         }
 
-        .logout-button {
-            background-color: #e53935;
-        }
-
-        .logout-button:hover {
-            background-color: #d32f2f;
+        .menu-button img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
         }
     </style>
 
@@ -106,28 +136,46 @@
     <!-- サイドバー -->
     <div class="sidebar">
         <h2>メニュー</h2>
+        <a href="from.jsp">機能一覧</a>
         <a href="DashboardServlet" onclick="showAlert('ダッシュボード画面')">ダッシュボード</a>
         <a href="HelpServlet" onclick="showAlert('ヘルプ画面')">ヘルプ</a>
+
+        <!-- ログアウトボタン -->
+        <div class="logout-wrapper">
+            <form action="FromServlet" method="post" onsubmit="return confirmLogout();">
+                <input type="submit" class="logout-button" name="button" value="logout">
+            </form>
+        </div>
     </div>
 
     <!-- メインコンテンツ -->
     <div class="main-content">
         <h2>機能一覧</h2>
         <div class="button-grid">
-            <form action="ProfileServlet" method="get" onsubmit="showAlert('プロフィール画面')">
-                <input type="submit" class="menu-button" value="プロフィール画面へ">
+
+            <form action="FromServlet" method="get" onsubmit="showAlert('アーティスト一覧画面')">
+                <button type="submit" class="menu-button" name="button" value="artist_list">
+                    <img src="https://cdn-icons-png.flaticon.com/512/64/64572.png" alt="Artist Icon">
+                    artist_list
+                </button>
+            </form>
+            
+            <form action="FromServlet" method="get" onsubmit="showAlert('アーティスト一覧画面')">
+                <button type="submit" class="menu-button" name="button" value="profile">
+                    <img src="" >
+                    profile
+                </button>
             </form>
 
             <form action="FromServlet" method="get" onsubmit="showAlert('設定画面')">
-                <input type="submit"  class="menu-button"name="button" value="setting" >
+                <button type="submit" class="menu-button" name="button" value="setting">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2099/2099058.png" alt="Settings Icon">
+                    setting
+                </button>
             </form>
 
-            <form action="FromServlet" method="post" onsubmit="return confirmLogout();">
-                <input type="submit" class="menu-button logout-button" name="button" value="logout">
-            </form>
         </div>
     </div>
 
 </body>
 </html>
-	
